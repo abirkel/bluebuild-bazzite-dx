@@ -17,10 +17,8 @@ modules:
       - |
         RUN curl -Lo /etc/yum.repos.d/abirkel-rpm-stable.repo \
             https://abirkel.github.io/rpm-repo/stable.repo && \
-          KERNEL_VERSION=$(rpm -q kernel --queryformat "%{VERSION}-%{RELEASE}" | head -1) && \
-          echo "Detected kernel version: $KERNEL_VERSION" && \
           rpm-ostree install -y \
-            kmod-yeetmouse-${KERNEL_VERSION}.x86_64 \
+            kmod-yeetmouse \
             yeetmouse && \
           ostree container commit
 
