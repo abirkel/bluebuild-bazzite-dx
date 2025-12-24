@@ -20,7 +20,7 @@ modules:
           KERNEL_VERSION=$(rpm -q kernel --queryformat "%{VERSION}-%{RELEASE}" | head -1) && \
           echo "Detected kernel version: $KERNEL_VERSION" && \
           rpm-ostree install -y \
-            kmod-yeetmouse-${KERNEL_VERSION} \
+            kmod-yeetmouse-${KERNEL_VERSION}.x86_64 \
             yeetmouse && \
           ostree container commit
 
