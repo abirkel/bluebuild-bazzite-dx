@@ -16,6 +16,8 @@ modules:
     snippets:
       - |
         RUN bash -c '\
+          curl -Lo /etc/yum.repos.d/abirkel-rpm-stable.repo \
+            https://abirkel.github.io/rpm-repo/stable.repo && \
           KERNEL_VERSION=$(rpm -q kernel --queryformat "%{VERSION}-%{RELEASE}" | head -1) && \
           echo "Detected kernel version: $KERNEL_VERSION" && \
           rpm-ostree install -y \
