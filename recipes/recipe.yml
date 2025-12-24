@@ -12,11 +12,15 @@ image-version: latest
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
-  - type: rpm-ostree
-    repos:
-      - https://abirkel.github.io/rpm-repo/stable.repo
-    install:
-      - kmod-yeetmouse
-      - yeetmouse
+  - type: containerfile
+    snippets:
+      - |
+        RUN bash -c '\
+          KERNEL_VERSION=$(rpm -q kernel --queryformat "%{VERSION}-%{RELEASE}" | head -1) && \
+          echo "Detected kernel version: $KERNEL_VERSION" && \
+          rpm-ostree install -y \
+            kmod-yeetmouse-${KERNEL_VERSION} \
+            yeetmouse \
+        '
 
   - type: signing  # Sets up policy & signing files for signed images
