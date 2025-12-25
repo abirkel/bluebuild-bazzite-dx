@@ -12,6 +12,10 @@ image-version: latest
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
+  - type: kargs
+    kargs:
+      - nvidia-drm.modeset=1
+
   - type: rpm-ostree
     repos:
       - https://abirkel.github.io/rpm-repo/stable.repo
@@ -25,6 +29,20 @@ modules:
       - docker-ce
       - docker-ce-cli
       - docker-compose-plugin
+      # Remove Waydroid and related packages
+      - waydroid
+      - waydroid-selinux
+      - cage
+      - wlr-randr
+      # Remove other unwanted packages
+      - btop
+      - sunshine
+      - ramalama
+      - restic
+      - zsh
+      - android-tools
+      - sysprof
+      - pytix
 
   # Install flatpaks on first boot via BlueBuild module
   # Note: Runtimes are not supported by this module, only apps
@@ -32,48 +50,38 @@ modules:
     notify: false
     system:
       install:
-        # Core Utilities
-        - com.github.tchx84.Flatseal
-        - io.github.flattool.Warehouse
-        - it.mijorus.gearlever
-        - org.mozilla.firefox
+        # KDE Applications
+        - org.kde.konsole
+        - org.kde.krita
+        - org.kde.okular
+        - org.kde.gwenview
+        - org.kde.kcalc
+        - org.kde.filelight
         # Gaming & Wine
         - com.github.Matoking.protontricks
         - com.usebottles.bottles
         - io.github.fastrizwaan.WineZGUI
         - net.davidotek.pupgui2
-        # Media & Creative
-        - com.obsproject.Studio
-        - org.gimp.GIMP
-        - org.blender.Blender
-        - org.kde.kdenlive
-        - org.kde.krita
-        - com.github.wwmm.easyeffects
-        # Productivity
-        - org.libreoffice.LibreOffice
-        - org.kde.okular
-        - com.github.PintaProject.Pinta
-        # Communication
-        - org.signal.Signal
-        - org.telegram.desktop
-        - dev.vencord.Vesktop
-        # Development
+        - com.vysp3r.ProtonPlus
+        - io.github.Faugus.faugus-launcher
+        # System Utilities
+        - com.github.tchx84.Flatseal
+        - io.github.flattool.Warehouse
+        - it.mijorus.gearlever
+        - org.freedesktop.Piper
+        # Development & Containers
         - io.podman_desktop.PodmanDesktop
-        - io.github.dvlv.boxbuddyrs
+        - io.github.DenysMb.Kontainer
+        # Media & Creative
+        - com.github.PintaProject.Pinta
+        - io.github.mpc_qt.mpc-qt
+        # Communication
+        - dev.vencord.Vesktop
+        # Other
         - de.leopoldluley.Clapgrep
-        # File Transfer & Torrents
-        - org.qbittorrent.qBittorrent
-        - org.localsend.localsend_app
-        - app.drey.Warp
-        - io.github.giantpinkrobots.varia
-        # Other Apps
-        - com.spotify.Client
-        - com.stremio.Stremio
         - org.fedoraproject.MediaWriter
-        - org.torproject.torbrowser-launcher
-        - com.github.k4zmu2a.spacecadetpinball
-        # AI/LLM
-        - com.jeffser.Alpaca
+        - org.localsend.localsend_app
+        - org.mozilla.firefox
 
   # Copy hook to disable flatpak auto-install after first run
   - type: files
