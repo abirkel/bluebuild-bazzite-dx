@@ -22,6 +22,7 @@ modules:
     install:
       - kmod-yeetmouse
       - yeetmouse
+      - konsole
     remove:
       # Remove Docker packages installed by bazzite-dx
       - containerd.io
@@ -51,12 +52,12 @@ modules:
     system:
       install:
         # KDE Applications
-        - org.kde.konsole
         - org.kde.krita
         - org.kde.okular
         - org.kde.gwenview
         - org.kde.kcalc
-        - org.kde.filelight
+        # KDE Themes
+        - org.gtk.Gtk3theme.Breeze
         # Gaming & Wine
         - com.github.Matoking.protontricks
         - com.usebottles.bottles
@@ -93,6 +94,11 @@ modules:
   - type: script
     scripts:
       - setup-hooks.sh
+
+  # Fetch Aurora blocklist dynamically
+  - type: script
+    scripts:
+      - fetch-aurora-blocklist.sh
 
   # Clean up Docker configurations from bazzite-dx base
   - type: script
