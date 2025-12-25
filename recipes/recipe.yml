@@ -90,11 +90,6 @@ modules:
       - source: system
         destination: /
 
-  # Make the hook executable
-  - type: script
-    scripts:
-      - setup-hooks.sh
-
   # Fetch Aurora blocklist dynamically
   - type: script
     scripts:
