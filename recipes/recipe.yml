@@ -42,7 +42,7 @@ modules:
       - zsh
       - android-tools
       - sysprof
-      - pytix
+      - ptyxis
 
   # Install flatpaks on first boot via BlueBuild module
   # Note: Runtimes are not supported by this module, only apps
