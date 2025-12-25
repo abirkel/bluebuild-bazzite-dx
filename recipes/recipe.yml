@@ -12,14 +12,11 @@ image-version: latest
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
-  - type: containerfile
-    snippets:
-      - |
-        RUN curl -Lo /etc/yum.repos.d/abirkel-rpm-stable.repo \
-            https://abirkel.github.io/rpm-repo/stable.repo && \
-          rpm-ostree install -y \
-            kmod-yeetmouse \
-            yeetmouse && \
-          ostree container commit
+  - type: rpm-ostree
+    repos:
+      - https://abirkel.github.io/rpm-repo/stable.repo
+    install:
+      - kmod-yeetmouse
+      - yeetmouse
 
   - type: signing  # Sets up policy & signing files for signed images
