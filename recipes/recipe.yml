@@ -3,7 +3,7 @@
 # image will be published to ghcr.io/<user>/<name>
 name: bluebuild-bazzite-dx
 # description will be included in the image's metadata
-description: Bazzite DX-based image with yeetmouse support
+description: Bazzite DX-based image with yeetmouse support and first-boot Flatpak installation
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/bazzite-dx-nvidia
@@ -18,5 +18,77 @@ modules:
     install:
       - kmod-yeetmouse
       - yeetmouse
+    remove:
+      # Remove Docker packages installed by bazzite-dx
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-ce
+      - docker-ce-cli
+      - docker-compose-plugin
+
+  # Install flatpaks on first boot via BlueBuild module
+  # Note: Runtimes are not supported by this module, only apps
+  - type: default-flatpaks
+    notify: false
+    system:
+      install:
+        # Core Utilities
+        - com.github.tchx84.Flatseal
+        - io.github.flattool.Warehouse
+        - it.mijorus.gearlever
+        - org.mozilla.firefox
+        # Gaming & Wine
+        - com.github.Matoking.protontricks
+        - com.usebottles.bottles
+        - io.github.fastrizwaan.WineZGUI
+        - net.davidotek.pupgui2
+        # Media & Creative
+        - com.obsproject.Studio
+        - org.gimp.GIMP
+        - org.blender.Blender
+        - org.kde.kdenlive
+        - org.kde.krita
+        - com.github.wwmm.easyeffects
+        # Productivity
+        - org.libreoffice.LibreOffice
+        - org.kde.okular
+        - com.github.PintaProject.Pinta
+        # Communication
+        - org.signal.Signal
+        - org.telegram.desktop
+        - dev.vencord.Vesktop
+        # Development
+        - io.podman_desktop.PodmanDesktop
+        - io.github.dvlv.boxbuddyrs
+        - de.leopoldluley.Clapgrep
+        # File Transfer & Torrents
+        - org.qbittorrent.qBittorrent
+        - org.localsend.localsend_app
+        - app.drey.Warp
+        - io.github.giantpinkrobots.varia
+        # Other Apps
+        - com.spotify.Client
+        - com.stremio.Stremio
+        - org.fedoraproject.MediaWriter
+        - org.torproject.torbrowser-launcher
+        - com.github.k4zmu2a.spacecadetpinball
+        # AI/LLM
+        - com.jeffser.Alpaca
+
+  # Copy hook to disable flatpak auto-install after first run
+  - type: files
+    files:
+      - source: system
+        destination: /
+
+  # Make the hook executable
+  - type: script
+    scripts:
+      - setup-hooks.sh
+
+  # Clean up Docker configurations from bazzite-dx base
+  - type: script
+    scripts:
+      - cleanup-docker.sh
 
   - type: signing  # Sets up policy & signing files for signed images
