@@ -100,6 +100,11 @@ modules:
     scripts:
       - fetch-aurora-blocklist.sh
 
+  # Install Microsoft TrueType Core Fonts
+  - type: script
+    scripts:
+      - install-msttcorefonts.sh
+
   # Clean up Docker configurations from bazzite-dx base
   - type: script
     scripts:
