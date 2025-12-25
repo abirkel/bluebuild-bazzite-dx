@@ -37,7 +37,7 @@ modules:
       - wlr-randr
       # Remove other unwanted packages
       - btop
-      - sunshine
+      - Sunshine
       - ramalama
       - restic
       - zsh
