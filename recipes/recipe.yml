@@ -44,6 +44,13 @@ modules:
       - android-tools
       - sysprof
       - ptyxis
+      # Remove Cockpit packages
+      - cockpit-networkmanager
+      - cockpit-podman
+      - cockpit-selinux
+      - cockpit-system
+      - cockpit-files
+      - cockpit-storaged
 
   # Install flatpaks on first boot via BlueBuild module
   # Note: Runtimes are not supported by this module, only apps
