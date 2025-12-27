@@ -108,8 +108,8 @@ modules:
     fonts:
       nerd-fonts:
         - CodeNewRoman
-        - CaskaydiaCove
-        - CaskaydiaMono
+        - CascadiaCode
+        - CascadiaMono
         - AurulentSansMono
 
   # Install fonts
