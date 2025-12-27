@@ -103,10 +103,19 @@ modules:
     scripts:
       - fetch-aurora-blocklist.sh
 
-  # Install Microsoft TrueType Core Fonts
+  # Install Nerd Fonts
+  - type: fonts
+    fonts:
+      nerd-fonts:
+        - CodeNewRoman
+        - CaskaydiaCove
+        - CaskaydiaMono
+        - AurulentSansMono
+
+  # Install fonts
   - type: script
     scripts:
-      - install-msttcorefonts.sh
+      - install-fonts.sh
 
   # Clean up Docker configurations from bazzite-dx base
   - type: script
