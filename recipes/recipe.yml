@@ -92,12 +92,6 @@ modules:
           - org.localsend.localsend_app
           - org.mozilla.firefox
 
-  # Copy hook to disable flatpak auto-install after first run
-  - type: files
-    files:
-      - source: system
-        destination: /
-
   # Fetch Aurora blocklist dynamically
   - type: script
     scripts:
