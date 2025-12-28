@@ -1,3 +1,12 @@
+# Root filesystem type - REQUIRED for Bazzite
+[customizations]
+filesystem = "btrfs"
+
+# Minimum root partition size
+[[customizations.filesystem]]
+mountpoint = "/"
+minsize = "25 GiB"
+
 [customizations.installer.kickstart]
 contents = """
 %post
