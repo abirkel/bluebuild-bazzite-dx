@@ -4,10 +4,10 @@ set -euo pipefail
 # Remove Docker CE repository (no longer needed)
 rm -f /etc/yum.repos.d/docker-ce.repo
 
-# Remove Docker-specific kernel module configuration
-# This loads iptable_nat for docker-in-docker support
+# Keep ip_tables.conf - iptable_nat module is needed for network auto-connect on first boot
+# Originally added for docker-in-docker support, but appears to be required for NetworkManager
 # See: https://github.com/ublue-os/bluefin/issues/2365
-rm -f /etc/modules-load.d/ip_tables.conf
+# rm -f /etc/modules-load.d/ip_tables.conf
 
 # Remove docker group from /etc/group
 # Note: We keep the 20-dx.sh file as it may be used for other groups in the future (e.g., incus-admin)
