@@ -14,7 +14,7 @@ yeetmouse is a Linux kernel module that provides sophisticated mouse acceleratio
 > [!WARNING]  
 > [This is an experimental feature](https://www.fedoraproject.org/wiki/Changes/OstreeNativeContainerStable), try at your own discretion.
 
-### Rebasing to bluebuild-bazzite-dx
+### Option 1: Rebase from Existing Installation
 
 To rebase an existing atomic Fedora installation to the latest bluebuild-bazzite-dx build:
 
@@ -37,6 +37,19 @@ To rebase an existing atomic Fedora installation to the latest bluebuild-bazzite
 
 The `latest` tag will automatically point to the latest build. That build will still always use the Fedora version specified in `recipe.yml`, so you won't get accidentally updated to the next major version.
 
+### Option 2: Fresh Install from ISO
+
+ISOs are built on-demand and available as GitHub Actions artifacts:
+
+1. Go to the [Actions tab](https://github.com/abirkel/bluebuild-bazzite-dx/actions/workflows/build-iso.yml)
+2. Click "Run workflow" to trigger a new ISO build
+3. Wait for the build to complete (~20-30 minutes)
+4. Download the ISO from the workflow artifacts
+5. Flash to USB using [Fedora Media Writer](https://www.fedoraproject.org/en/workstation/download) or similar tool
+6. Boot and install
+
+**Note:** ISOs are retained for 7 days after build. If you need an ISO and none are available, simply trigger a new build.
+
 ### yeetmouse Configuration
 
 After rebasing to bluebuild-bazzite-dx, the yeetmouse kernel module and tools are automatically installed.
@@ -56,9 +69,26 @@ sudo modprobe yeetmouse
 
 For yeetmouse configuration and usage, refer to the [yeetmouse documentation](https://github.com/AndyFilter/YeetMouse).
 
-## ISO
+## Managing Flatpaks
 
-If build on Fedora Atomic, you can generate an offline ISO with the instructions available [here](https://blue-build.org/learn/universal-blue/#fresh-install-from-an-iso). These ISOs cannot unfortunately be distributed on GitHub for free due to large sizes, so for public projects something else has to be used for hosting.
+This image installs a curated set of Flatpak applications on first boot. After installation, these applications will automatically reinstall if removed (standard BlueBuild behavior).
+
+**To prevent automatic reinstallation:**
+```bash
+bluebuild-flatpak-manager disable all
+```
+
+**To re-enable automatic management:**
+```bash
+bluebuild-flatpak-manager enable all
+```
+
+## Included Customizations
+
+- **Removed packages:** Docker (use Podman), Waydroid, various Cockpit modules, and other unwanted packages
+- **Added packages:** Konsole terminal, yeetmouse tools
+- **Fonts:** Custom MS core fonts and Nerd Fonts (CodeNewRoman, CascadiaCode, CascadiaMono, AurulentSansMono)
+- **Flatpaks:** KDE apps, gaming tools, development containers, and more (see `recipes/recipe.yml` for full list)
 
 ## Verification
 
