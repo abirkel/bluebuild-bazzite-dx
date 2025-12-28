@@ -45,6 +45,7 @@ modules:
       - sysprof
       - ptyxis
       # Remove Cockpit packages
+      - cockpit-networkmanager
       - cockpit-podman
       - cockpit-selinux
       - cockpit-system
