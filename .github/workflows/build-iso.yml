@@ -7,6 +7,7 @@ env:
   IMAGE_NAME: ${{ github.event.repository.name }}
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"
   IMAGE_TAG: "latest"
+  BIB_IMAGE: "ghcr.io/lorbuschris/bootc-image-builder:20250608"
 
 jobs:
   build-iso:
@@ -18,6 +19,15 @@ jobs:
       id-token: write
 
     steps:
+      - name: Prepare environment
+        run: |
+          USER_UID=$(id -u)
+          USER_GID=$(id -g)
+          echo "IMAGE_REGISTRY=${IMAGE_REGISTRY,,}" >> ${GITHUB_ENV}
+          echo "IMAGE_NAME=${IMAGE_NAME,,}" >> ${GITHUB_ENV}
+          echo "USER_UID=${USER_UID}" >> ${GITHUB_ENV}
+          echo "USER_GID=${USER_GID}" >> ${GITHUB_ENV}
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -28,10 +38,13 @@ jobs:
         id: build
         uses: osbuild/bootc-image-builder-action@main
         with:
+          builder-image: ${{ env.BIB_IMAGE }}
           config-file: ./disk_config/iso.toml
           image: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          chown: ${{ env.USER_UID }}:${{ env.USER_GID }}
           types: anaconda-iso
           rootfs: btrfs
+          additional-args: --use-librepo=True
 
       - name: Upload ISO
         uses: actions/upload-artifact@v4
