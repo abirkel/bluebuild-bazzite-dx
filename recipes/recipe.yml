@@ -12,9 +12,9 @@ image-version: latest
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
-  - type: kargs
-    kargs:
-      - nvidia-drm.modeset=1
+  # - type: kargs
+  #   kargs:
+  #     - nvidia-drm.modeset=1
 
   - type: rpm-ostree
     repos:
@@ -52,45 +52,10 @@ modules:
       - cockpit-files
       - cockpit-storaged
 
-  # Install flatpaks on first boot via BlueBuild module
-  # Note: Runtimes are not supported by this module, only apps
-  - type: default-flatpaks
-    configurations:
-      - scope: user
-        notify: false
-        install:
-          # KDE Applications
-          - org.kde.krita
-          - org.kde.okular
-          - org.kde.gwenview
-          - org.kde.kcalc
-          # KDE Themes
-          - org.gtk.Gtk3theme.Breeze
-          # Gaming & Wine
-          - com.github.Matoking.protontricks
-          - com.usebottles.bottles
-          - io.github.fastrizwaan.WineZGUI
-          - net.davidotek.pupgui2
-          - com.vysp3r.ProtonPlus
-          - io.github.Faugus.faugus-launcher
-          # System Utilities
-          - com.github.tchx84.Flatseal
-          - io.github.flattool.Warehouse
-          - it.mijorus.gearlever
-          - org.freedesktop.Piper
-          # Development & Containers
-          - io.podman_desktop.PodmanDesktop
-          - io.github.DenysMb.Kontainer
-          # Media & Creative
-          - com.github.PintaProject.Pinta
-          - io.github.mpc_qt.mpc-qt
-          # Communication
-          - dev.vencord.Vesktop
-          # Other
-          - de.leopoldluley.Clapgrep
-          - org.fedoraproject.MediaWriter
-          - org.localsend.localsend_app
-          - org.mozilla.firefox
+  # Flatpaks are now installed via ujust script
+  # Users run: ujust install-flatpaks
+  # List available flatpaks: ujust list-flatpaks
+  # flatpaks.txt is automatically copied from files/system/
 
   # Fetch Aurora blocklist dynamically
   - type: script

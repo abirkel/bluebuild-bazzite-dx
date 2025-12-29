@@ -71,17 +71,22 @@ For yeetmouse configuration and usage, refer to the [yeetmouse documentation](ht
 
 ## Managing Flatpaks
 
-This image installs a curated set of Flatpak applications on first boot. After installation, these applications will automatically reinstall if removed (standard BlueBuild behavior).
+This image includes a curated list of Flatpak applications that can be installed on-demand.
 
-**To prevent automatic reinstallation:**
+**To install all recommended Flatpaks:**
 ```bash
-bluebuild-flatpak-manager disable all
+ujust install-flatpaks
 ```
 
-**To re-enable automatic management:**
+**To see the list of available Flatpaks:**
 ```bash
-bluebuild-flatpak-manager enable all
+ujust list-flatpaks
 ```
+
+**To edit the Flatpak list:**
+Edit `files/flatpaks.txt` in the repository and rebuild the image.
+
+Unlike the automatic installation in some images, this approach gives you control over when Flatpaks are installed and shows clear progress during installation.
 
 ## Included Customizations
 

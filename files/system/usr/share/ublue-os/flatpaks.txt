@@ -1,0 +1,32 @@
+# KDE Applications
+org.kde.krita
+org.kde.okular
+org.kde.gwenview
+org.kde.kcalc
+# KDE Themes
+org.gtk.Gtk3theme.Breeze
+# Gaming & Wine
+com.github.Matoking.protontricks
+com.usebottles.bottles
+io.github.fastrizwaan.WineZGUI
+net.davidotek.pupgui2
+com.vysp3r.ProtonPlus
+io.github.Faugus.faugus-launcher
+# System Utilities
+com.github.tchx84.Flatseal
+io.github.flattool.Warehouse
+it.mijorus.gearlever
+org.freedesktop.Piper
+# Development & Containers
+io.podman_desktop.PodmanDesktop
+io.github.DenysMb.Kontainer
+# Media & Creative
+com.github.PintaProject.Pinta
+io.github.mpc_qt.mpc-qt
+# Communication
+dev.vencord.Vesktop
+# Other
+de.leopoldluley.Clapgrep
+org.fedoraproject.MediaWriter
+org.localsend.localsend_app
+org.mozilla.firefox
