@@ -3,6 +3,12 @@
 # Tell this script to exit if there are any errors.
 set -oue pipefail
 
+echo "========================================" >&2
+echo "SCRIPT STARTING: install-fonts.sh" >&2
+echo "PWD: $(pwd)" >&2
+echo "SCRIPT_DIR check..." >&2
+echo "========================================" >&2
+
 echo "Installing fonts..."
 
 # Get the directory where this script is located

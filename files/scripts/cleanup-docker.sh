@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+echo "========================================" >&2
+echo "SCRIPT STARTING: cleanup-docker.sh" >&2
+echo "========================================" >&2
+
 # Remove Docker CE repository (no longer needed)
 rm -f /etc/yum.repos.d/docker-ce.repo
 

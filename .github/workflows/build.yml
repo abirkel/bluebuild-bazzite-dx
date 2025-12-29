@@ -32,7 +32,7 @@ jobs:
         uses: blue-build/github-action@v1.10
         with:
           recipe: ${{ matrix.recipe }}
-          cosign_private_key: ${{ secrets.COSIGN_PRIVATE_KEY }}
+          cosign_private_key: ${{ github.actor != 'dependabot[bot]' && secrets.COSIGN_PRIVATE_KEY || '' }}
           registry_token: ${{ github.token }}
           pr_event_number: ${{ github.event.number }}
 
