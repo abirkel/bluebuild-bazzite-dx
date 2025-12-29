@@ -58,12 +58,9 @@ modules:
   # flatpaks.txt is automatically copied from files/system/
 
   # Fetch Aurora blocklist dynamically
-  - type: script
-    snippets:
-      - "echo 'Testing snippet execution'"
-      - "echo 'PWD:' $(pwd)"
-      - "echo 'Running fetch-aurora-blocklist...'"
-      - "bash /tmp/files/scripts/fetch-aurora-blocklist.sh"
+  - type: script@v1
+    scripts:
+      - fetch-aurora-blocklist.sh
 
   # Install Nerd Fonts
   - type: fonts
@@ -75,12 +72,12 @@ modules:
         - AurulentSansMono
 
   # Install fonts
-  - type: script
+  - type: script@v1
     scripts:
       - install-fonts.sh
 
   # Clean up Docker configurations from bazzite-dx base
-  - type: script
+  - type: script@v1
     scripts:
       - cleanup-docker.sh
 

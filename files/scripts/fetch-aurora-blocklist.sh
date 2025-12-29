@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 
-set -oue pipefail
-
-echo "========================================" >&2
-echo "SCRIPT STARTING: fetch-aurora-blocklist.sh" >&2
-echo "PWD: $(pwd)" >&2
-echo "USER: $(whoami)" >&2
-echo "========================================" >&2
+set -euo pipefail
 
 echo "Fetching Aurora blocklist..."
 
