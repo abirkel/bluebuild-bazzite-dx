@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -oue pipefail
 
 echo "========================================" >&2
 echo "SCRIPT STARTING: fetch-aurora-blocklist.sh" >&2
