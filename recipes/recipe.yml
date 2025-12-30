@@ -52,10 +52,15 @@ modules:
       - cockpit-files
       - cockpit-storaged
 
+  # Copy system files (flatpaks.txt and ujust scripts)
+  - type: files
+    files:
+      - source: system
+        destination: /
+
   # Flatpaks are now installed via ujust script
   # Users run: ujust install-flatpaks
   # List available flatpaks: ujust list-flatpaks
-  # flatpaks.txt is automatically copied from files/system/
 
   # Fetch Aurora blocklist dynamically
   - type: script@v1
