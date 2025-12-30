@@ -2,6 +2,9 @@ install-flatpaks:
     #!/usr/bin/env bash
     set -euo pipefail
     
+    # Ensure Flathub user remote is configured
+    flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    
     FLATPAK_LIST="/usr/share/ublue-os/flatpaks.txt"
     
     echo "Installing Flatpaks from list..."
