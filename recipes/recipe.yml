@@ -86,4 +86,9 @@ modules:
     scripts:
       - cleanup-docker.sh
 
+  # Clean up Waydroid desktop entries and files
+  - type: script@v1
+    scripts:
+      - cleanup-waydroid.sh
+
   - type: signing  # Sets up policy & signing files for signed images

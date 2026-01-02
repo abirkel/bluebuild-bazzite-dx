@@ -3,7 +3,12 @@ install-flatpaks:
     set -euo pipefail
     
     # Ensure Flathub user remote is configured
-    flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    if ! flatpak remote-list --user | grep -q "^flathub"; then
+        echo "Adding Flathub remote..."
+        flatpak remote-add --user flathub https://flathub.org/repo/flathub.flatpakrepo
+    else
+        echo "Flathub remote already configured."
+    fi
     
     FLATPAK_LIST="/usr/share/ublue-os/flatpaks.txt"
     
