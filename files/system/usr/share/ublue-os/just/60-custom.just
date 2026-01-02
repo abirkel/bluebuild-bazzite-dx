@@ -22,7 +22,7 @@ install-flatpaks:
         [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]] && continue
         
         echo "Installing: $line"
-        flatpak install -y --user flathub "$line" || echo "Failed to install $line, continuing..."
+        flatpak install -y --user --noninteractive flathub "$line" || echo "Failed to install $line, continuing..."
     done < "$FLATPAK_LIST"
     
     echo ""
