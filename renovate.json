@@ -1,0 +1,20 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base"],
+  "docker": {
+    "enabled": true,
+    "pinDigests": true
+  },
+  "packageRules": [
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/ublue-os/bazzite-dx-nvidia"],
+      "automerge": true,
+      "automergeType": "pr",
+      "commitMessageTopic": "upstream bazzite-dx-nvidia",
+      "commitMessageExtra": "",
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps"
+    }
+  ]
+}
