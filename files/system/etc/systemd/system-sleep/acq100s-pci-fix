@@ -1,0 +1,52 @@
+#!/bin/sh
+#
+# ACQ100S suspend/resume workaround
+#
+# /usr/lib/systemd/system-sleep/acq100s-pci-fix
+# Set ownership to root and permissions to 755
+# 
+
+DRIVER="atlantic"
+DRV_PATH="/sys/bus/pci/drivers/$DRIVER"
+STATE_FILE="/run/acq100s-devices"
+
+find_devs() {
+    # Find only devices currently managed by $DRIVER
+    find /sys/bus/pci/devices/*/driver -lname "*$DRIVER" -printf '%f\n' 2>/dev/null
+}
+
+case "$1" in
+    pre)
+        # Ensure the driver directory exists before trying to unbind
+        [ -d "$DRV_PATH" ] || exit 0
+        
+        find_devs > "$STATE_FILE"
+        if [ -s "$STATE_FILE" ]; then
+            while read -r dev; do
+                # Added clear context to the log
+                echo "ACQ100S: [Sleep fix] Unbinding $dev"
+                echo "$dev" > "$DRV_PATH/unbind" 2>/dev/null
+            done < "$STATE_FILE"
+        fi
+        ;;
+    post)
+        [ -f "$STATE_FILE" ] || exit 0
+        [ -d "$DRV_PATH" ] || { rm -f "$STATE_FILE"; exit 0; }
+
+        while read -r dev; do
+            echo "ACQ100S: [Sleep fix] Re-binding $dev"
+            # Re-bind the device to the driver
+            echo "$dev" > "$DRV_PATH/bind" 2>/dev/null
+            
+            if [ -L "/sys/bus/pci/devices/$dev/driver" ]; then
+                echo "ACQ100S: [Sleep fix] $dev successfully re-initialized"
+            else
+                echo "ACQ100S: [Sleep fix] ERROR: $dev failed to re-bind"
+            fi
+        done < "$STATE_FILE"
+        
+        rm -f "$STATE_FILE"
+        ;;
+esac
+
+exit 0
