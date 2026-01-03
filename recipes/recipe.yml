@@ -6,7 +6,8 @@ name: bluebuild-bazzite-dx
 description: Bazzite DX-based image with yeetmouse support and first-boot Flatpak installation
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/bazzite-dx-nvidia@sha256:4f811fdc52e4628f3411cb712f5a9daeb72bfd78e899b559d6d6dab76bc51c48
+base-image: ghcr.io/ublue-os/bazzite-dx-nvidia
+image-version: latest
 
 # module configuration, executed in order
 # you can include multiple instances of the same module

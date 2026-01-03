@@ -1,7 +1,7 @@
 name: bluebuild
 on:
-  # schedule:
-  #   - cron: "20 06 * * *" # build at 06:20 UTC every day (20 minutes after yeetmouse rpm build starts at 06:00 UTC)
+  schedule:
+    - cron: "20 06 * * *" # build at 06:20 UTC every day (20 minutes after yeetmouse rpm build starts at 06:00 UTC)
   push:
     paths-ignore: # don't rebuild if only documentation has changed
       - "**.md"
